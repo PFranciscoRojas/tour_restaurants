@@ -1,4 +1,4 @@
-package com.restaurant.main.application.controller;
+package com.tour.restaurant.application.controller;
 
 public class BookingController {
 }

@@ -1,4 +1,4 @@
-package com.restaurant.main.infraestructure.Mapper;
+package com.tour.restaurant.infraestructure.Mapper;
 
 public interface BookingMapper {
 }

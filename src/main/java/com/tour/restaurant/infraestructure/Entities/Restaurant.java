@@ -1,44 +1,52 @@
-package com.restaurant.main.infraestructure.Entities;
+package com.tour.restaurant.infraestructure.Entities;
 
 import jakarta.persistence.*;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
 
+import java.util.Date;
 import java.util.List;
 
 @Entity
+@Table(name = "restaurant")
 public class Restaurant {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_restaurant")
-    private Long idRestaurant;
+    private Long id;
 
-    @Column(name = "name")
+    @Column(nullable = false)
     private String name;
 
-    @Column(name = "adrees")
-    private String address;
-
-    @Column(name = "description")
     private String description;
 
-    @Column(name = "schedule")
+    @Column(nullable = false)
+    private String address;
+
     private String schedule;
 
-    @Column(name = "plan")
-    private String plan;
+    private String type;
 
+    @CreatedDate
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date createdAt;
 
-    @OneToMany(mappedBy = "restaurant", fetch = FetchType.LAZY)
-    private List<Table> tables;
+    @LastModifiedDate
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date updatedAt;
 
-    @OneToMany(mappedBy = "restaurant", fetch = FetchType.LAZY)
+    // Getters and Setters (omitted for brevity)
+
+    // Relationship with Booking (one-to-many)
+    @OneToMany(mappedBy = "restaurant")
     private List<Booking> bookings;
 
-    public Long getIdRestaurant() {
-        return idRestaurant;
+    public Long getId() {
+        return id;
     }
 
-    public void setIdRestaurant(Long id) {
-        this.idRestaurant = id;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -49,20 +57,20 @@ public class Restaurant {
         this.name = name;
     }
 
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
     public String getDescription() {
         return description;
     }
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     public String getSchedule() {
@@ -73,11 +81,36 @@ public class Restaurant {
         this.schedule = schedule;
     }
 
-    public String getPlan() {
-        return plan;
+    public String getType() {
+        return type;
     }
 
-    public void setPlan(String plan) {
-        this.plan = plan;
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public Date getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public Date getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(Date updatedAt) {
+        this.updatedAt = updatedAt;
+    }
+
+    public List<Booking> getBookings() {
+        return bookings;
+    }
+
+    public void setBookings(List<Booking> bookings) {
+        this.bookings = bookings;
     }
 }
+

@@ -1,6 +1,5 @@
-package com.restaurant.main.Domain.Repositiory;
-import com.restaurant.main.infraestructure.Entities.Booking;
-import com.restaurant.main.infraestructure.Entities.Restaurant;
+package com.tour.restaurant.Domain.Repositiory;
+import com.tour.restaurant.infraestructure.Entities.*;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import java.util.List;

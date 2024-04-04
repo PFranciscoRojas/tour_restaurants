@@ -1,4 +1,4 @@
-package com.restaurant.main.Domain.DTO;
+package com.tour.restaurant.Domain.DTO;
 
 public class Restaurant {
 }

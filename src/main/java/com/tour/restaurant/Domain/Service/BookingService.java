@@ -1,4 +1,4 @@
-package com.restaurant.main.Domain.Service;
+package com.tour.restaurant.Domain.Service;
 
 public class BookingService {
 }

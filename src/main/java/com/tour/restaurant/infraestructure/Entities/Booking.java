@@ -1,29 +1,48 @@
-package com.restaurant.main.infraestructure.Entities;
+package com.tour.restaurant.infraestructure.Entities;
 import jakarta.persistence.*;
-import java.util.List;
+import com.tour.restaurant.infraestructure.Entities.*;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
+
 import java.util.Date;
 
 
 @Entity
+@Table(name = "booking")
 public class Booking {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private Long idTable;
 
-    private Long idRestaurant;
-    private Long idCustomer;
-    private int capacity;
+    @Column(nullable = false)
+    private Integer capacity;
+
+    @Column(nullable = false)
     private Date date;
-    private String plan;
-    private String status;
 
-    @OneToOne(mappedBy = "booking", fetch = FetchType.LAZY)
-    private Table table;
+    @Enumerated(EnumType.STRING)
+    private BookingStatus status;  // Enum for pending, confirmed, canceled
 
-    @OneToMany(mappedBy = "booking", fetch = FetchType.LAZY)
-    private List<Restaurant> restaurants;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_restaurant", nullable = false)
+    private Restaurant restaurant;
 
+    @OneToOne(optional = false)   // Consider if a booking always needs a table
+    @JoinColumn(name = "id_table_food", nullable = false)
+    private TableFood tableFood;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_customer", nullable = false)
+    private Customer customer;   // Assuming a Customer entity exists
+
+    @CreatedDate
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date createdAt;
+
+    @LastModifiedDate
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date updatedAt;
 
     public Long getId() {
         return id;
@@ -33,36 +52,11 @@ public class Booking {
         this.id = id;
     }
 
-    public Long getIdTable() {
-        return idTable;
-    }
-
-    public void setIdTable(Long idTable) {
-        this.idTable = idTable;
-
-    }
-
-    public Long getIdRestaurant() {
-        return idRestaurant;
-    }
-
-    public void setIdRestaurant(Long idRestaurant) {
-        this.idRestaurant = idRestaurant;
-    }
-
-    public Long getIdCustomer() {
-        return idCustomer;
-    }
-
-    public void setIdCustomer(Long idCustomer) {
-        this.idCustomer = idCustomer;
-    }
-
-    public int getCapacity() {
+    public Integer getCapacity() {
         return capacity;
     }
 
-    public void setCapacity(int capacity) {
+    public void setCapacity(Integer capacity) {
         this.capacity = capacity;
     }
 
@@ -74,19 +68,54 @@ public class Booking {
         this.date = date;
     }
 
-    public String getPlan() {
-        return plan;
-    }
-
-    public void setPlan(String plan) {
-        this.plan = plan;
-    }
-
-    public String getStatus() {
+    public BookingStatus getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(BookingStatus status) {
         this.status = status;
     }
+
+    public Restaurant getRestaurant() {
+        return restaurant;
+    }
+
+    public void setRestaurant(Restaurant restaurant) {
+        this.restaurant = restaurant;
+    }
+
+    public TableFood getTableFood() {
+        return tableFood;
+    }
+
+    public void setTableFood(TableFood tableFood) {
+        this.tableFood = tableFood;
+    }
+
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
+    }
+
+    public Date getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public Date getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(Date updatedAt) {
+        this.updatedAt = updatedAt;
+    }
+
+    // Getters and Setters (omitted for brevity)
 }
+

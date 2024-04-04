@@ -1,9 +1,9 @@
-package com.restaurant.main.Domain.Repositiory;
-import com.restaurant.main.infraestructure.Entities.Table;
+package com.tour.restaurant.Domain.Repositiory;
+import com.tour.restaurant.infraestructure.Entities.*;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface TableRepository extends JpaRepository<Table, Long> {
+public interface TableRepository extends JpaRepository<TableFood, Long> {
     // Aquí puedes agregar métodos adicionales si necesitas consultas personalizadas
 }
