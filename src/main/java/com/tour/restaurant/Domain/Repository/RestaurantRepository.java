@@ -1,4 +1,4 @@
-package com.tour.restaurant.Domain.Repositiory;
+package com.tour.restaurant.Domain.Repository;
 import com.tour.restaurant.infraestructure.Entities.*;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

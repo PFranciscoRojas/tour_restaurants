@@ -6,7 +6,6 @@ import org.springframework.data.annotation.LastModifiedDate;
 
 import java.util.Date;
 
-
 @Entity
 @Table(name = "booking")
 public class Booking {
@@ -21,6 +20,9 @@ public class Booking {
     @Column(nullable = false)
     private Date date;
 
+    @Column(nullable = false)
+    private Integer numberOfPeople; // Número de personas en la reserva
+
     @Enumerated(EnumType.STRING)
     private BookingStatus status;  // Enum for pending, confirmed, canceled
 
@@ -32,10 +34,6 @@ public class Booking {
     @JoinColumn(name = "id_table_food", nullable = false)
     private TableFood tableFood;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_customer", nullable = false)
-    private Customer customer;   // Assuming a Customer entity exists
-
     @CreatedDate
     @Temporal(TemporalType.TIMESTAMP)
     private Date createdAt;
@@ -43,6 +41,8 @@ public class Booking {
     @LastModifiedDate
     @Temporal(TemporalType.TIMESTAMP)
     private Date updatedAt;
+
+    // Getters and setters
 
     public Long getId() {
         return id;
@@ -66,6 +66,14 @@ public class Booking {
 
     public void setDate(Date date) {
         this.date = date;
+    }
+
+    public Integer getNumberOfPeople() {
+        return numberOfPeople;
+    }
+
+    public void setNumberOfPeople(Integer numberOfPeople) {
+        this.numberOfPeople = numberOfPeople;
     }
 
     public BookingStatus getStatus() {
@@ -92,14 +100,6 @@ public class Booking {
         this.tableFood = tableFood;
     }
 
-    public Customer getCustomer() {
-        return customer;
-    }
-
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
-    }
-
     public Date getCreatedAt() {
         return createdAt;
     }
@@ -115,7 +115,4 @@ public class Booking {
     public void setUpdatedAt(Date updatedAt) {
         this.updatedAt = updatedAt;
     }
-
-    // Getters and Setters (omitted for brevity)
 }
-
