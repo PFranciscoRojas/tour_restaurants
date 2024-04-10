@@ -15,3 +15,5 @@ public interface BookingMapper {
     @Mapping(target = "restaurant.id", source = "restaurantId")
     Booking toEntity(BookingDTO bookingDTO);
 }
+
+
