@@ -2,8 +2,9 @@ package com.tour.restaurant.Domain.Service;
 
 import com.tour.restaurant.Domain.DTO.BookingDTO;
 import com.tour.restaurant.infraestructure.Entities.Booking;
-import com.tour.restaurant.infraestructure.Entities.TableFood;
+import com.tour.restaurant.infraestructure.Entities.Restaurant;
 import com.tour.restaurant.Domain.Repository.BookingRepository;
+import com.tour.restaurant.Domain.Repository.RestaurantRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -11,23 +12,21 @@ import org.springframework.beans.factory.annotation.Autowired;
 public class BookingService {
 
     @Autowired
-    private TableAssignmentService tableAssignmentService;
+    private BookingRepository bookingRepository;
 
     @Autowired
-    private BookingRepository bookingRepository;
+    private RestaurantRepository restaurantRepository;
 
     public BookingDTO makeReservation(BookingDTO bookingDto) {
         // Convertir el DTO de la reserva a la entidad de reserva
         Booking bookingEntity = convertToEntity(bookingDto);
 
-        // Obtener la cantidad de personas en la reserva
-        int numberOfPeople = bookingEntity.getNumberOfPeople();
+        // Obtener el restaurante por su ID
+        Restaurant restaurant = restaurantRepository.findById(bookingDto.getRestaurantId())
+                .orElseThrow(() -> new RuntimeException("No se encontró ningún restaurante con el ID proporcionado: " + bookingDto.getRestaurantId()));
 
-        // Asignar una mesa para la reserva
-        TableFood assignedTable = tableAssignmentService.assignTable(numberOfPeople);
-
-        // Asignar la mesa a la reserva
-        bookingEntity.setTableFood(assignedTable);
+        // Asignar el restaurante a la reserva
+        bookingEntity.setRestaurant(restaurant);
 
         // Guardar la reserva en la base de datos
         Booking savedBooking = bookingRepository.save(bookingEntity);
@@ -40,7 +39,8 @@ public class BookingService {
     private Booking convertToEntity(BookingDTO bookingDto) {
         Booking bookingEntity = new Booking();
         // Asignar valores del DTO a la entidad
-        bookingEntity.setNumberOfPeople(bookingDto.getNumberOfPeople());
+        bookingEntity.setCapacity(bookingDto.getCapacity());
+        bookingEntity.setDate(bookingDto.getDate());
         // Otros campos...
         return bookingEntity;
     }
@@ -49,7 +49,8 @@ public class BookingService {
     private BookingDTO convertToDto(Booking bookingEntity) {
         BookingDTO bookingDto = new BookingDTO();
         // Asignar valores de la entidad al DTO
-        bookingDto.setNumberOfPeople(bookingEntity.getNumberOfPeople());
+        bookingDto.setCapacity(bookingEntity.getCapacity());
+        bookingDto.setDate(bookingEntity.getDate());
         // Otros campos...
         return bookingDto;
     }

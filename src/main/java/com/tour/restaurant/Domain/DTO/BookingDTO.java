@@ -34,4 +34,5 @@ public class BookingDTO {
     public void setRestaurantId(Long restaurantId) {
         this.restaurantId = restaurantId;
     }
+
 }
