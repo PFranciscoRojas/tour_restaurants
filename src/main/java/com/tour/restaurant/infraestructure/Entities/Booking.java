@@ -23,8 +23,11 @@ public class Booking {
     @Column(nullable = false)
     private Integer numberOfPeople; // Número de personas en la reserva
 
-    @Enumerated(EnumType.STRING)
-    private BookingStatus status;  // Enum for pending, confirmed, canceled
+    @Column(nullable = false)
+    private Boolean status;  // Track booking status (true: confirmed, false: pending)
+
+    @Column(nullable = false)
+    private Boolean paymentStatus;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_restaurant", nullable = false)
@@ -76,12 +79,20 @@ public class Booking {
         this.numberOfPeople = numberOfPeople;
     }
 
-    public BookingStatus getStatus() {
+    public Boolean getStatus() {
         return status;
     }
 
-    public void setStatus(BookingStatus status) {
+    public void setStatus(Boolean status) {
         this.status = status;
+    }
+
+    public Boolean getPaymentStatus() {
+        return paymentStatus;
+    }
+
+    public void setPaymentStatus(Boolean paymentStatus) {
+        this.paymentStatus = paymentStatus;
     }
 
     public Restaurant getRestaurant() {
@@ -99,6 +110,8 @@ public class Booking {
     public void setTableFood(TableFood tableFood) {
         this.tableFood = tableFood;
     }
+
+
 
     public Date getCreatedAt() {
         return createdAt;
