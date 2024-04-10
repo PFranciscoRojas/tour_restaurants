@@ -9,11 +9,29 @@ public class BookingDTO {
     private Date date;
     private Long restaurantId;
 
-
-    public Integer getNumberOfPeople() {
-        return 0;
+    //Functions:
+    public Long getId() {
+        return id;
     }
-
-    public void setNumberOfPeople(Integer numberOfPeople) {
+    public void setId(Long id) {
+        this.id = id;
+    }
+    public Integer getCapacity() {
+        return capacity;
+    }
+    public void setCapacity(Integer capacity) {
+        this.capacity = capacity;
+    }
+    public Date getDate() {
+        return date;
+    }
+    public void setDate(Date date) {
+        this.date = date;
+    }
+    public Long getRestaurantId() {
+        return restaurantId;
+    }
+    public void setRestaurantId(Long restaurantId) {
+        this.restaurantId = restaurantId;
     }
 }
