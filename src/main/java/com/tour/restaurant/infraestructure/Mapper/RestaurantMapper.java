@@ -18,10 +18,12 @@ public interface RestaurantMapper {
             @Mapping(source = "descripcion", target ="description"),
             @Mapping(source = "direccion", target ="address"),
             @Mapping(source = "cronograma", target ="shedule"),
-            @Mapping(source = "tipo", target ="type")
+            @Mapping(source = "tipo", target ="type"),
+            @Mapping(source = "creadoEn", target ="created_at"),
+            @Mapping(source = "cargadoEn", target ="uploaded_at")
     })
     Restaurant toRestaurant(Restaurant restaurant);
-    List<Restaurant> toRestaurants(List<Restaurant> restaurant);
+    List<Restaurant> toRestaurants(List<Restaurant> restaurantes);
     default Optional<Restaurant> toRestaurantsOptional(Optional<Restaurant> restaurant ){
         return  restaurant.map(this::toRestaurant);
     }
