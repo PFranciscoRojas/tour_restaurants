@@ -20,7 +20,7 @@ public class TableFood {
     private Integer number;
 
     @Column(nullable = false)
-    private Boolean isAvailable;
+    private Boolean available;
 
     @CreatedDate
     @Temporal(TemporalType.TIMESTAMP)
@@ -55,12 +55,13 @@ public class TableFood {
     }
 
     public Boolean getAvailable() {
-        return isAvailable;
+        return available;
     }
 
-    public void setAvailable(Boolean available) {
-        isAvailable = available;
+    public Boolean isAvailable() {
+        return available;
     }
+
 
     public Date getCreatedAt() {
         return createdAt;
@@ -78,18 +79,24 @@ public class TableFood {
         this.updatedAt = updatedAt;
     }
 
-    public Booking getBooking() {
-        return booking;
-    }
 
-    public void setBooking(Booking booking) {
-        this.booking = booking;
-    }
-
-    // Relationship with Booking (one-to-one) - Consider if needed (optional)
     @OneToOne(mappedBy = "tableFood")
     private Booking booking;
 
 
-}
+    public TableFood() {
+    }
 
+
+    public TableFood(Integer capacity, Integer number, Boolean available, Date createdAt, Date updatedAt) {
+        this.capacity = capacity;
+        this.number = number;
+        this.available = available;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
+    }
+
+    public void setAvailable(boolean available) {
+        this.available = available;
+    }
+}

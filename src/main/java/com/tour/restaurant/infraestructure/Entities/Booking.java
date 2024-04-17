@@ -1,10 +1,10 @@
 package com.tour.restaurant.infraestructure.Entities;
 import jakarta.persistence.*;
+import com.tour.restaurant.infraestructure.Entities.*;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 
 import java.util.Date;
-
 
 @Entity
 @Table(name = "booking")
@@ -20,8 +20,14 @@ public class Booking {
     @Column(nullable = false)
     private Date date;
 
-    @Enumerated(EnumType.STRING)
-    private BookingStatus status;  // Enum for pending, confirmed, canceled
+    @Column(nullable = false)
+    private Integer numberOfPeople; // Número de personas en la reserva
+
+    @Column(nullable = false)
+    private Boolean status;  // Track booking status (true: confirmed, false: pending)
+
+    @Column(nullable = false)
+    private Boolean paymentStatus;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_restaurant", nullable = false)
@@ -31,10 +37,6 @@ public class Booking {
     @JoinColumn(name = "id_table_food", nullable = false)
     private TableFood tableFood;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_customer", nullable = false)
-    private Customer customer;   // Assuming a Customer entity exists
-
     @CreatedDate
     @Temporal(TemporalType.TIMESTAMP)
     private Date createdAt;
@@ -42,6 +44,8 @@ public class Booking {
     @LastModifiedDate
     @Temporal(TemporalType.TIMESTAMP)
     private Date updatedAt;
+
+    // Getters and setters
 
     public Long getId() {
         return id;
@@ -67,12 +71,28 @@ public class Booking {
         this.date = date;
     }
 
-    public BookingStatus getStatus() {
+    public Integer getNumberOfPeople() {
+        return numberOfPeople;
+    }
+
+    public void setNumberOfPeople(Integer numberOfPeople) {
+        this.numberOfPeople = numberOfPeople;
+    }
+
+    public Boolean getStatus() {
         return status;
     }
 
-    public void setStatus(BookingStatus status) {
+    public void setStatus(Boolean status) {
         this.status = status;
+    }
+
+    public Boolean getPaymentStatus() {
+        return paymentStatus;
+    }
+
+    public void setPaymentStatus(Boolean paymentStatus) {
+        this.paymentStatus = paymentStatus;
     }
 
     public Restaurant getRestaurant() {
@@ -91,13 +111,7 @@ public class Booking {
         this.tableFood = tableFood;
     }
 
-    public Customer getCustomer() {
-        return customer;
-    }
 
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
-    }
 
     public Date getCreatedAt() {
         return createdAt;
@@ -114,7 +128,4 @@ public class Booking {
     public void setUpdatedAt(Date updatedAt) {
         this.updatedAt = updatedAt;
     }
-
-    // Getters and Setters (omitted for brevity)
 }
-
