@@ -2,56 +2,55 @@ package com.tour.restaurant.Domain.Service;
 
 import com.tour.restaurant.Domain.DTO.BookingDTO;
 import com.tour.restaurant.infraestructure.Entities.Booking;
-import com.tour.restaurant.infraestructure.Entities.Restaurant;
-import com.tour.restaurant.Domain.Repository.BookingRepository;
-import com.tour.restaurant.Domain.Repository.RestaurantRepository;
-import org.springframework.stereotype.Service;
+import com.tour.restaurant.infraestructure.Repositories.BookingRepository;
+import com.tour.restaurant.Domain.Repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class BookingService {
 
-    @Autowired
-    private BookingRepository bookingRepository;
+    private final BookingRepository bookingRepository;
+    private final RestaurantRepository restaurantRepository;
 
     @Autowired
-    private RestaurantRepository restaurantRepository;
-
-    public BookingDTO makeReservation(BookingDTO bookingDto) {
-
-        Booking bookingEntity = convertToEntity(bookingDto);
-
-
-        Restaurant restaurant = restaurantRepository.findById(bookingDto.getRestaurantId())
-                .orElseThrow(() -> new RuntimeException("No se encontró ningún restaurante con el ID proporcionado: " + bookingDto.getRestaurantId()));
-
-
-        bookingEntity.setRestaurant(restaurant);
-
-
-        Booking savedBooking = bookingRepository.save(bookingEntity);
-
-
-        return convertToDto(savedBooking);
+    public BookingService(BookingRepository bookingRepository, RestaurantRepository restaurantRepository) {
+        this.bookingRepository = bookingRepository;
+        this.restaurantRepository = restaurantRepository;
     }
 
-
-    private Booking convertToEntity(BookingDTO bookingDto) {
-        Booking bookingEntity = new Booking();
-
-        bookingEntity.setCapacity(bookingDto.getCapacity());
-        bookingEntity.setDate(bookingDto.getDate());
-
-        return bookingEntity;
+    public List<BookingDTO> getAllBookings() {
+        List<Booking> bookings = bookingRepository.findAll();
+        return bookings.stream().map(this::convertToDTO).collect(Collectors.toList());
     }
 
+    public BookingDTO getBookingById(Long id) {
+        Optional<Booking> optionalBooking = bookingRepository.findById(id);
+        return optionalBooking.map(this::convertToDTO).orElse(null);
+    }
 
-    private BookingDTO convertToDto(Booking bookingEntity) {
-        BookingDTO bookingDto = new BookingDTO();
+    public BookingDTO createBooking(BookingDTO bookingDTO) {
+        Booking booking = convertToEntity(bookingDTO);
+        // Additional logic for validation, setting default values, etc. can be added here
+        Booking savedBooking = bookingRepository.save(booking);
+        return convertToDTO(savedBooking);
+    }
 
-        bookingDto.setCapacity(bookingEntity.getCapacity());
-        bookingDto.setDate(bookingEntity.getDate());
+    private Booking convertToEntity(BookingDTO bookingDTO) {
+        Booking booking = new Booking();
+        booking.setCapacity(bookingDTO.getCapacity());
+        // Set other fields similarly
+        return booking;
+    }
 
-        return bookingDto;
+    private BookingDTO convertToDTO(Booking booking) {
+        BookingDTO bookingDTO = new BookingDTO();
+        bookingDTO.setId(booking.getId());
+        // Set other fields similarly
+        return bookingDTO;
     }
 }

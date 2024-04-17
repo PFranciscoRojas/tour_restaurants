@@ -39,4 +39,3 @@ CREATE TABLE booking (
     -- FOREIGN KEY (id_customer) REFERENCES Customer(id)
 );
 
-
