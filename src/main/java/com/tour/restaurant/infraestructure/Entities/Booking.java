@@ -1,6 +1,5 @@
 package com.tour.restaurant.infraestructure.Entities;
 import jakarta.persistence.*;
-import com.tour.restaurant.infraestructure.Entities.*;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 
