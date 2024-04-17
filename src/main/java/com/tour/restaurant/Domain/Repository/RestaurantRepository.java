@@ -1,5 +1,5 @@
 package com.tour.restaurant.Domain.Repository;
-import com.tour.restaurant.infraestructure.Entities.*;
+import com.tour.restaurant.infraestructure.Entities.Restaurant;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import java.util.List;
@@ -11,6 +11,7 @@ public interface RestaurantRepository extends JpaRepository<Restaurant, Long> {
     List<Restaurant> getAll();
     List<Restaurant> getByRestaurant(Restaurant restaurant);
     Optional<Restaurant> getById(long id);
+    Restaurant save(Restaurant restaurant);
     void deleteByID(long id);
-    //Restaurant save(Restaurant restaurant);
+
 }
