@@ -11,10 +11,13 @@ public interface BookingMapper {
     BookingMapper INSTANCE = Mappers.getMapper(BookingMapper.class);
 
     @Mapping(source = "restaurant.id", target = "restaurantId")
-    BookingDTO bookingToBookingDTO(Booking booking);
+    BookingDTO toBookingDTO(Booking booking);
 
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "createdAt", ignore = true)
     @Mapping(target = "updatedAt", ignore = true)
-    Booking bookingDTOToBooking(BookingDTO bookingDTO);
+
+    Booking DTOToBooking(BookingDTO bookingDTO);
+
+
 }

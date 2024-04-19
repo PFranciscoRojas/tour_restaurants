@@ -1,17 +1,53 @@
 package com.tour.restaurant.infraestructure.Repositories;
 
+import com.tour.restaurant.Domain.Repository.BookingRepositoryDomain;
 import com.tour.restaurant.infraestructure.Entities.Booking;
-
+import com.tour.restaurant.infraestructure.Mapper.BookingMapper;
+import com.tour.restaurant.infraestructure.Repositories.Crud.BookingCrudRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 import java.util.List;
 import java.util.Optional;
 
-public abstract class BookingRepository {
+@Repository
+public  class BookingRepository implements BookingRepositoryDomain {
 
-    public abstract Optional<Booking> findById(Long id);
+    @Autowired
+    private BookingCrudRepository bookingCrudRepository;
 
-    // Guardar una nueva reserva o actualizar una existente
-    public abstract <S extends Booking> S save(S booking);
+    @Autowired
+    private BookingMapper bookingMapper;
 
-    // Recuperar todas las reservas
-    public abstract List<Booking> findAll();
+
+    @Override
+    public List<Booking> findByBookingId(Long bookingId) {
+        return null;
+    }
+
+    @Override
+    public List<Booking> getAll() {
+        return null;
+    }
+
+
+    @Override
+    public List<Booking> getByBooking(Booking Booking) {
+        return null;
+    }
+
+    @Override
+    public Optional<Booking> getById(long id) {
+        return Optional.empty();
+    }
+
+    @Override
+    public Booking save(Booking Booking) {
+        return null;
+    }
+
+    @Override
+    public void deleteByID(long id) {
+
+    }
+
 }
