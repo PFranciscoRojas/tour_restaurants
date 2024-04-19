@@ -1,5 +1,6 @@
 package com.tour.restaurant.infraestructure.Repositories;
 
+import com.tour.restaurant.Domain.DTO.BookingDTO;
 import com.tour.restaurant.Domain.Repository.BookingRepositoryDomain;
 import com.tour.restaurant.infraestructure.Entities.Booking;
 import com.tour.restaurant.infraestructure.Mapper.BookingMapper;
@@ -19,34 +20,31 @@ public  class BookingRepository implements BookingRepositoryDomain {
     private BookingMapper bookingMapper;
 
 
+
+
     @Override
-    public List<Booking> findByBookingId(Long bookingId) {
-        return null;
+    public List<BookingDTO> getAll() {
+        List<Booking> bookings = (List<Booking>) bookingCrudRepository.findAll();
+        return bookingMapper.toBookings(bookings);
+
+    }
+
+
+    @Override
+    public Optional<BookingDTO> getById(long id) {
+        Optional<Booking> booking = bookingCrudRepository.findById(id);
+        return bookingMapper.toBookingsOptional(booking);
     }
 
     @Override
-    public List<Booking> getAll() {
-        return null;
-    }
-
-
-    @Override
-    public List<Booking> getByBooking(Booking Booking) {
-        return null;
-    }
-
-    @Override
-    public Optional<Booking> getById(long id) {
-        return Optional.empty();
-    }
-
-    @Override
-    public Booking save(Booking Booking) {
-        return null;
+    public BookingDTO save(BookingDTO BookingDto) {
+        Booking booking = bookingMapper.toBooking(BookingDto);
+        return bookingMapper.toBookingDTO(bookingCrudRepository.save(booking));
     }
 
     @Override
     public void deleteByID(long id) {
+        bookingCrudRepository.deleteById(id);
 
     }
 

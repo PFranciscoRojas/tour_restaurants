@@ -6,18 +6,30 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;
 
+import java.util.List;
+import java.util.Optional;
+
 @Mapper
 public interface BookingMapper {
     BookingMapper INSTANCE = Mappers.getMapper(BookingMapper.class);
 
     @Mapping(source = "restaurant.id", target = "restaurantId")
-    BookingDTO toBookingDTO(Booking booking);
+
 
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "createdAt", ignore = true)
     @Mapping(target = "updatedAt", ignore = true)
 
-    Booking DTOToBooking(BookingDTO bookingDTO);
+    Booking toBooking(BookingDTO bookingDTO);
+
+    BookingDTO toBookingDTO(Booking booking);
+    List<BookingDTO> toBookings(List<Booking> libros);
+    default Optional<BookingDTO> toBookingsOptional(Optional<Booking> booking ){
+        return  booking.map(this::toBookingDTO);
+    }
+
+
+
 
 
 }

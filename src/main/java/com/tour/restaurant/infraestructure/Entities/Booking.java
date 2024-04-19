@@ -1,10 +1,12 @@
 package com.tour.restaurant.infraestructure.Entities;
+import com.tour.restaurant.Domain.DTO.BookingDTO;
 import jakarta.persistence.*;
 import com.tour.restaurant.infraestructure.Entities.*;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 
 import java.util.Date;
+import java.util.Optional;
 
 @Entity
 @Table(name = "booking")
@@ -44,6 +46,8 @@ public class Booking {
     @LastModifiedDate
     @Temporal(TemporalType.TIMESTAMP)
     private Date updatedAt;
+
+
 
     // Getters and setters
 
