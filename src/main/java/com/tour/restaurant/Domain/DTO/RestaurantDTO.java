@@ -1,5 +1,7 @@
 package com.tour.restaurant.Domain.DTO;
 
+import java.util.Date;
+
 public class RestaurantDTO {
 
     private Long id;
@@ -8,6 +10,8 @@ public class RestaurantDTO {
     private String address;
     private String schedule;
     private String type;
+    private Date createdAt;
+    private Date updatedAt;
 
     //Functions:
 
@@ -57,5 +61,21 @@ public class RestaurantDTO {
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    public Date getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public Date getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(Date updatedAt) {
+        this.updatedAt = updatedAt;
     }
 }

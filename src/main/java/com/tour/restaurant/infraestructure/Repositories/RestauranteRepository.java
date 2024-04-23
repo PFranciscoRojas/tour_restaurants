@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 import java.util.Optional;
 @Repository
-public class RestauranteRepository implements  RestaurantRepository{
+public abstract class RestauranteRepository implements  RestaurantRepository{
     @Autowired
     public RestaurantCrudRepository restauranteRepo;
     @Autowired
