@@ -1,4 +1,4 @@
 package com.tour.restaurant.infraestructure.Repositories;
 
-public class TableFoodRepository {
+public class TableFoodRepository implements {
 }
