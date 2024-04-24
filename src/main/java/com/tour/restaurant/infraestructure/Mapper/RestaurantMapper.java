@@ -14,16 +14,14 @@ import java.util.Optional;
 
 @Mapper(componentModel = "spring", uses = {RestaurantMapper.class})
 public interface RestaurantMapper {
-    @Mappings({
-            @Mapping(source = "idRestaurante", target ="id"),
-            @Mapping(source = "nombre", target ="name"),
-            @Mapping(source = "descripcion", target ="description"),
-            @Mapping(source = "direccion", target ="address"),
-            @Mapping(source = "cronograma", target ="shedule"),
-            @Mapping(source = "tipo", target ="type"),
-            @Mapping(source = "creadoEn", target ="created_at"),
-            @Mapping(source = "cargadoEn", target ="uploaded_at")
-    })
+
+    @Mapping(source = "restaurant.id", target = "restaurantId")
+
+
+    @Mapping(target = "id", ignore = true)
+    @Mapping(target = "createdAt", ignore = true)
+    @Mapping(target = "updatedAt", ignore = true)
+
     Restaurant toRestaurant(RestaurantDTO restaurantDTO);
     RestaurantDTO toRestaurantDTO(Restaurant restaurant);
     List<RestaurantDTO> toRestaurants(List<Restaurant> restaurantes);
