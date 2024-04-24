@@ -23,9 +23,9 @@ public abstract class RestauranteRepository implements  RestaurantRepository{
     }
     //--------------------------------------------------------------------------------
     @Override
-    public List<Restaurant> getByRestaurant(Restaurant restaurant){
-        List<Restaurant> restaurantes = (List<Restaurant>) restauranteRepo.getByRestaurant(restaurant);
-        return mapper.toRestaurants(restaurantes);
+    public List<RestaurantDTO> getByRestaurant(RestaurantDTO restaurantDTO){
+        List<RestaurantDTO> restaurantes = (List<Restaurant>) restauranteRepo.getByRestaurant(restaurantDTO);
+        return mapper.toRestaurantsDTO(restaurantes);
     }
     //--------------------------------------------------------------------------------
     @Override

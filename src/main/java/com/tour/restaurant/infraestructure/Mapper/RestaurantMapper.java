@@ -1,5 +1,7 @@
 package com.tour.restaurant.infraestructure.Mapper;
 
+import com.tour.restaurant.Domain.DTO.BookingDTO;
+import com.tour.restaurant.infraestructure.Entities.Booking;
 import com.tour.restaurant.infraestructure.Entities.Restaurant;
 import com.tour.restaurant.Domain.DTO.RestaurantDTO;
 import org.mapstruct.Mapper;
@@ -22,11 +24,12 @@ public interface RestaurantMapper {
             @Mapping(source = "creadoEn", target ="created_at"),
             @Mapping(source = "cargadoEn", target ="uploaded_at")
     })
-    Restaurant toRestaurant(Restaurant restaurant);
-    List<Restaurant> toRestaurants(List<Restaurant> restaurantes);
-    default Optional<Restaurant> toRestaurantsOptional(Optional<Restaurant> restaurant ){
-        return  restaurant.map(this::toRestaurant);
-    }
+    Restaurant toRestaurant(RestaurantDTO restaurantDTO);
+    RestaurantDTO toRestaurantDTO(Restaurant restaurant);
+    List<RestaurantDTO> toRestaurants(List<Restaurant> restaurantes);
+    /*default Optional<RestaurantDTO> toRestaurantsOptional(Optional<RestaurantDTO> restaurant ){
+        return  restaurant.map(this::toRestaurantDTO);
+    }*/
     @InheritInverseConfiguration
     Restaurant toRestaurante(Restaurant restaurant);
 }
