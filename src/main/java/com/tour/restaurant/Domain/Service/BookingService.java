@@ -29,6 +29,18 @@ public class BookingService {
         return bookingRepository.getById(id);
     }
 
+    public BookingDTO save (BookingDTO bookingDTO){
+        return bookingRepository.save(bookingDTO);
+    }
+
+    public boolean delete(Long id){
+        if (getBookingById(id).isPresent()) {
+            bookingRepository.deleteByID(id);
+            return true;
+        }
+        return false;
+    };
+
    /** public BookingDTO createBooking(BookingDTO) {
         Booking booking = convertToEntity(bookingDTO);
         // Additional logic for validation, setting default values, etc. can be added here
