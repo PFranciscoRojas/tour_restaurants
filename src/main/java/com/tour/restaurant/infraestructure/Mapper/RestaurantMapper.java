@@ -30,4 +30,8 @@ public interface RestaurantMapper {
     }*/
     @InheritInverseConfiguration
     Restaurant toRestaurante(Restaurant restaurant);
+
+    List<RestaurantDTO> toRestaurantsDTO(List<RestaurantDTO> restaurantes);
+
+    Optional<Restaurant> toRestaurantsOptional(Optional<Restaurant> restaurant);
 }

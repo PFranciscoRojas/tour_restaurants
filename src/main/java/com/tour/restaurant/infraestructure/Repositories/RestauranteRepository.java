@@ -17,16 +17,14 @@ public abstract class RestauranteRepository implements  RestaurantRepository{
     public RestaurantMapper mapper;
     //--------------------------------------------------------------------------------
     @Override
-    public List<Restaurant> getAll(){
+    public List<RestaurantDTO> getAll(){
         List<Restaurant> restaurantes = (List<Restaurant>) restauranteRepo.findAll();
         return mapper.toRestaurants(restaurantes);
     }
-    //--------------------------------------------------------------------------------
-    @Override
-    public List<RestaurantDTO> getByRestaurant(RestaurantDTO restaurantDTO){
-        List<RestaurantDTO> restaurantes = (List<Restaurant>) restauranteRepo.getByRestaurant(restaurantDTO);
-        return mapper.toRestaurantsDTO(restaurantes);
-    }
+    //-------------------------------------------------------------------------------
+    //
+    // quitar get by restaurant-
+
     //--------------------------------------------------------------------------------
     @Override
     public Optional<Restaurant> getById(long idRestaurant){
@@ -35,9 +33,9 @@ public abstract class RestauranteRepository implements  RestaurantRepository{
     }
     //--------------------------------------------------------------------------------
     @Override
-    public Restaurant save(Restaurant restaurant){
-        Restaurant restaurante = mapper.toRestaurant(restaurant);
-        return mapper.toRestaurant(restauranteRepo.save(restaurante));
+    public RestaurantDTO save(RestaurantDTO restaurantDTO){
+        Restaurant restaurante = mapper.toRestaurant(restaurantDTO);
+        return mapper.toRestaurantDTO(restauranteRepo.save(restaurante));
     }
     //--------------------------------------------------------------------------------
     @Override
