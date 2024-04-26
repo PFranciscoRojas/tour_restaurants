@@ -6,5 +6,4 @@ import org.springframework.data.repository.CrudRepository;
 import java.util.List;
 
 public interface RestaurantCrudRepository extends CrudRepository<Restaurant, Long> {
-    List<Restaurant> getByRestaurant(Restaurant restaurant);
 }

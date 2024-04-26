@@ -8,10 +8,9 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface TableRepository extends JpaRepository<TableFood, Long> {
+public interface TableFoodRepositoryDomain  {
 
 
-    List<TableFood> findByCapacityGreaterThanEqualAndIsAvailableTrue(int capacity);
 
     Optional<TableFood> findByNumber(int number);
 
@@ -20,5 +19,13 @@ public interface TableRepository extends JpaRepository<TableFood, Long> {
 
 
     List<TableFood> findByIsAvailableFalse();
+
+    List<TableFood> findAll();
+
+    Optional<TableFood> findById(Long id);
+
+    TableFood save(TableFood table);
+
+    void deleteById(Long id);
 }
 

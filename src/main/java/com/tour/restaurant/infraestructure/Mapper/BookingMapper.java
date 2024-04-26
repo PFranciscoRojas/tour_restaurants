@@ -16,14 +16,13 @@ public interface BookingMapper {
     BookingMapper INSTANCE = Mappers.getMapper(BookingMapper.class);
 
     @Mapping(source = "restaurant.id", target = "restaurantId")
-    @Mapping(target = "id", ignore = true)
     @Mapping(target = "createdAt", ignore = true)
     @Mapping(target = "updatedAt", ignore = true)
 
 
     Booking toBooking(BookingDTO bookingDTO);
     BookingDTO toBookingDTO(Booking booking);
-    List<BookingDTO> toBookings(List<Booking> libros);
+    List<BookingDTO> toBookings(List<Booking> bookings);
 
     default Optional<BookingDTO> toBookingsOptional(Optional<Booking> booking ){
         return  booking.map(this::toBookingDTO);

@@ -2,7 +2,7 @@ package com.tour.restaurant.Domain.Service;
 
 import com.tour.restaurant.Domain.DTO.RestaurantDTO;
 import com.tour.restaurant.infraestructure.Entities.Restaurant;
-import com.tour.restaurant.Domain.Repository.RestaurantRepository;
+import com.tour.restaurant.Domain.Repository.RestaurantRepositoryDomain;
 import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 import java.util.List;
@@ -12,19 +12,19 @@ import java.util.Optional;
 public class RestaurantService {
 
     @Autowired
-    private RestaurantRepository restaurantRepository;
+    private RestaurantRepositoryDomain restaurantRepositoryDomain;
 
-    public List<Restaurant> getAll(){
-        return restaurantRepository.getAll();
+    public List<RestaurantDTO> getAll(){
+        return restaurantRepositoryDomain.getAll();
     }
     public Optional<Restaurant> getById(long restaurantID){
-        return restaurantRepository.getById(restaurantID);
+        return restaurantRepositoryDomain.getById(restaurantID);
     }
     public List<Restaurant> getByRestaurant(Restaurant restaurant){
-        return restaurantRepository.getByRestaurant(restaurant);
+        return restaurantRepositoryDomain.getByRestaurant(restaurant);
     }
     public Restaurant save(Restaurant restaurant){
-        return restaurantRepository.save(restaurant);
+        return restaurantRepositoryDomain.save(restaurant);
     }
     /*public boolean delete(long id){
         if (getById(id).isPresent()){
@@ -39,7 +39,7 @@ public class RestaurantService {
         Restaurant restaurantEntity = convertToEntity(restaurantDto);
 
 
-        Restaurant savedRestaurant = restaurantRepository.save(restaurantEntity);
+        Restaurant savedRestaurant = restaurantRepositoryDomain.save(restaurantEntity);
 
 
         return convertToDto(savedRestaurant);

@@ -16,9 +16,6 @@ import java.util.Optional;
 public interface RestaurantMapper {
 
     @Mapping(source = "restaurant.id", target = "restaurantId")
-
-
-    @Mapping(target = "id", ignore = true)
     @Mapping(target = "createdAt", ignore = true)
     @Mapping(target = "updatedAt", ignore = true)
 

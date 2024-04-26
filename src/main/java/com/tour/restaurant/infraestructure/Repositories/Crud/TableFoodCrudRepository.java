@@ -12,7 +12,6 @@ import java.util.Optional;
 public interface TableFoodCrudRepository extends CrudRepository<TableFood, Long> {
 
 
-    List<TableFood> findByCapacityGreaterThanEqualAndIsAvailableTrue(int capacity);
 
     Optional<TableFood> findByNumber(int number);
 
