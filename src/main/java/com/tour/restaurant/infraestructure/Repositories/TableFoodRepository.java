@@ -1,43 +1,55 @@
 package com.tour.restaurant.infraestructure.Repositories;
 
 
+import com.tour.restaurant.Domain.DTO.TableFoodDTO;
 import com.tour.restaurant.Domain.Repository.TableFoodRepositoryDomain;
 import com.tour.restaurant.infraestructure.Entities.TableFood;
+import com.tour.restaurant.infraestructure.Mapper.TableFoodMapper;
+import com.tour.restaurant.infraestructure.Repositories.Crud.TableFoodCrudRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 import java.util.Optional;
 
 public class TableFoodRepository implements TableFoodRepositoryDomain{
 
+    @Autowired
+    public TableFoodCrudRepository tableRepo ;
 
+    @Autowired
+    public TableFoodMapper tableMapper ;
 
     @Override
-    public Optional<TableFood> findByNumber(int number) {
+    public Optional<TableFood> findByNumberTable(int number) {
         return Optional.empty();
     }
 
     @Override
-    public List<TableFood> findByIsAvailableTrue() {
+    public List<TableFood> findByIsAvailableTrue(Long idRestaurant) {
         return null;
     }
 
     @Override
-    public List<TableFood> findByIsAvailableFalse() {
+    public List<TableFood> findByIsAvailableFalse(Long idRestaurant) {
+
         return null;
     }
 
     @Override
-    public List<TableFood> findAll() {
-        return null;
+    public List<TableFoodDTO> findAll() {
+        List<TableFood> tables = (List<TableFood>) tableRepo.findAll();
+        return tableMapper.toTablesFood(tables);
     }
 
     @Override
-    public Optional<TableFood> findById(Long id) {
-        return Optional.empty();
+    public Optional<TableFoodDTO> findById(Long id) {
+        Optional<TableFood> table = tableRepo.findById(id);
+        return tableMapper.toTablesFoodOptional(table);
     }
 
     @Override
-    public TableFood save(TableFood table) {
+    public TableFoodDTO save(TableFood table) {
+
         return null;
     }
 

@@ -1,7 +1,7 @@
 package com.tour.restaurant.Domain.Repository;
 
+import com.tour.restaurant.Domain.DTO.TableFoodDTO;
 import com.tour.restaurant.infraestructure.Entities.TableFood;
-import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -12,17 +12,17 @@ public interface TableFoodRepositoryDomain  {
 
 
 
-    Optional<TableFood> findByNumber(int number);
+    Optional<TableFood> findByNumberTable(int number);
 
 
-    List<TableFood> findByIsAvailableTrue();
+    List<TableFood> findByIsAvailableTrue(Long idRestaurant);
 
 
-    List<TableFood> findByIsAvailableFalse();
+    List<TableFood> findByIsAvailableFalse(Long idRestaurant);
 
-    List<TableFood> findAll();
+    List<TableFoodDTO> findAll();
 
-    Optional<TableFood> findById(Long id);
+    Optional<TableFoodDTO> findById(Long id);
 
     TableFood save(TableFood table);
 

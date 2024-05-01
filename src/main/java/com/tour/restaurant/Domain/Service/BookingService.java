@@ -41,27 +41,5 @@ public class BookingService {
         return false;
     };
 
-   /** public BookingDTO createBooking(BookingDTO) {
-        Booking booking = convertToEntity(bookingDTO);
-        // Additional logic for validation, setting default values, etc. can be added here
-        Booking savedBooking = bookingRepository.save(booking);
-        return convertToDTO(savedBooking);
-    }
 
-
-    private Booking convertToEntity(BookingDTO bookingDTO) {
-        Booking booking = new Booking();
-        booking.setCapacity(bookingDTO.getCapacity());
-        // Set other fields similarly
-        return booking;
-    }
-
-    private BookingDTO convertToDTO(Booking booking) {
-        BookingDTO bookingDTO = new BookingDTO();
-        bookingDTO.setId(booking.getId());
-        // Set other fields similarly
-        return bookingDTO;
-    }
-
-    **/
 }
