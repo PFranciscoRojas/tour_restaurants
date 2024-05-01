@@ -24,7 +24,7 @@ public interface TableFoodRepositoryDomain  {
 
     Optional<TableFoodDTO> findById(Long id);
 
-    TableFood save(TableFood table);
+    TableFoodDTO save(TableFoodDTO table);
 
     void deleteById(Long id);
 }

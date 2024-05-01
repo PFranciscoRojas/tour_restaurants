@@ -13,11 +13,11 @@ import java.util.Optional;
 
 public class TableFoodRepository implements TableFoodRepositoryDomain{
 
-    @Autowired
+
     public TableFoodCrudRepository tableRepo ;
 
-    @Autowired
     public TableFoodMapper tableMapper ;
+
 
     @Override
     public Optional<TableFood> findByNumberTable(int number) {
@@ -48,13 +48,14 @@ public class TableFoodRepository implements TableFoodRepositoryDomain{
     }
 
     @Override
-    public TableFoodDTO save(TableFood table) {
+    public TableFoodDTO save(TableFoodDTO table) {
+        TableFood tableFood = tableMapper.toTableFood(table);
+        return tableMapper.toTableFoodDTO(tableRepo.save(tableFood));
 
-        return null;
     }
 
     @Override
     public void deleteById(Long id) {
-
+        tableRepo.deleteById(id);
     }
 }
